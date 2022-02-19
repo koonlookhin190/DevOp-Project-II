@@ -73,5 +73,44 @@ a > span{
     line-height: 35px;
 }
 
+#table2,#table4{
+    position: relative;
+    left:500px;
+    width: 157.32px;
+    height: 115.38px;
+}
+#table1,#table3,#table5{
+    position: relative;
+    left:100px;
+    width: 157.32px;
+    height: 115.38px;
+}
 
+#pHeader{
+    font-family: 'Dancing Script', cursive;      font-size: 120px;
+     color:black;
+     line-height: 80px;
+     font-size: 80px;
 
+}
+#selectTB{
+    text-align: center;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 35px;
+}
+.Header{
+    background-color: gold;
+    color:black;
+    text-align: center;
+
+}
+.mainBody{
+    background-image: url('../Font-endPro/image/BG2.jpg');
+    background-size:cover;
+}
+.divBody{
+    height:100vh;
+    background-color: #020202;
+    box-shadow: #020202 0px 54px 55px,  #020202 0px -12px 30px, #020202 0px 4px 6px,  #020202 0px 12px 13px,  #020202 0px -3px 5px;
+   
+}
