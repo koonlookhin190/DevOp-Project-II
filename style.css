@@ -1,16 +1,17 @@
-body{
-    background-color: black;
-    color: white;
-   
-}
-#resName{
-    color: gold;
-}
 .picture{
     width: 100%;
     text-align:left;
     height: 100vh;
     padding-left: 0%;
+}
+body{
+    background-color: black;
+    color: white;
+   
+}
+.row>*{
+    padding-left: 0%;
+    padding-right: 0%;
 }
 .wc{
     text-align: center;
@@ -18,9 +19,8 @@ body{
     padding:  23% 10% 18% 10%;
     font-family: 'Source Sans Pro', sans-serif; font-size: 18px; line-height: 32px;
 }
-.row>*{
-    padding-left: 0%;
-    padding-right: 0%;
+#resName{
+    color: gold;
 }
 #p1{
     font-family: 'Dancing Script', cursive;      font-size: 120px;
@@ -29,6 +29,11 @@ body{
 }
 #p2{
     line-height: 15px;
+}
+#p2-2{
+    line-height: 15px;
+    margin-top: -20px;
+    margin-bottom: 35px;
 }
 #p3{
     font-family: 'Roboto Condensed', sans-serif;
@@ -49,10 +54,24 @@ body{
     background-color: gold;
     line-height: 32px;
 }
+.button2{
+    font-family: 'Roboto Condensed', sans-serif;
+    margin-top: 30px;
+    font-size: 30px;
+    background-color: gold;
+    line-height: 40px;
+}
 a:link , a:visited{
     color: gold;
 }
-
 a > span{
     color: black;
 }
+
+.IDPW{
+    text-align: right;
+    line-height: 35px;
+}
+
+
+
