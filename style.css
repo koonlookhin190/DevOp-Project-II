@@ -114,3 +114,7 @@ a > span{
     box-shadow: #020202 0px 54px 55px,  #020202 0px -12px 30px, #020202 0px 4px 6px,  #020202 0px 12px 13px,  #020202 0px -3px 5px;
    
 }
+
+.modal{
+    color:black;
+}
