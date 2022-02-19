@@ -1,0 +1,58 @@
+body{
+    background-color: black;
+    color: white;
+   
+}
+#resName{
+    color: gold;
+}
+.picture{
+    width: 100%;
+    text-align:left;
+    height: 100vh;
+    padding-left: 0%;
+}
+.wc{
+    text-align: center;
+    vertical-align: middle;
+    padding:  23% 10% 18% 10%;
+    font-family: 'Source Sans Pro', sans-serif; font-size: 18px; line-height: 32px;
+}
+.row>*{
+    padding-left: 0%;
+    padding-right: 0%;
+}
+#p1{
+    font-family: 'Dancing Script', cursive;      font-size: 120px;
+    padding-bottom: 70px;
+    color:gold;
+}
+#p2{
+    line-height: 15px;
+}
+#p3{
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 25px;
+    padding-bottom: 20px;
+    line-height: 15px;
+
+}
+#p4{
+    margin-top: -25px;
+    line-height: 18px;
+}
+.button{
+    font-family: 'Roboto Condensed', sans-serif;
+
+    margin-top: 50px;
+    font-size: 30px;
+    background-color: gold;
+    line-height: 32px;
+}
+a:link , a:visited{
+    color: gold;
+}
+
+a > span{
+    color: black;
+}
