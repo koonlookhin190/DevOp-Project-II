@@ -35,9 +35,31 @@
                     <div class="divBody">
                         <div class="Header">
                             <p><span id="pHeader">KD</span> </p>
-                            <p> <span id="selectTB">Select Table</span> </p>
-                        </div>
 
+                            <div id="mySidenav" class="sidenav">
+                                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                                <a href="#">Main</a>
+                                <a href="#">Services</a>
+                                <a href="#">Clients</a>
+                                <a href="#">Contact</a>
+                              </div>
+
+                              <div id="Order" class="sidenavRight">
+                                <a href="javascript:void(0)" class="closebtn" onclick="closeNav2()">&times;</a>
+                                <a href="#">Main</a>
+                                <a href="#">Services</a>
+                                <a href="#">Clients</a>
+                                <a href="#">Contact</a>
+                              </div>
+                              
+                              <!-- Use any element to open the sidenav -->
+                              <ul>
+                                <li> <span onclick="openNav()">Menu</span></li>
+                                <li> <span onclick="openNav2()">Orders</span></li>
+                              </ul>
+                        
+                         
+                        </div>
                         <div class="Middle">
                             <p id="TBnumber">Now you're selecting Table </p>
 
@@ -57,6 +79,30 @@
         var TBnumber = JSON.parse(localStorage.getItem('TBnum'));
         console.log(TBnumber.no);
         document.getElementById("TBnumber").innerHTML = 'Now you are selecting Table ' + TBnumber.no;
+
+        /* Set the width of the side navigation to 250px and the left margin of the page content to 250px and add a black background color to body */
+function openNav() {
+  document.getElementById("mySidenav").style.width = "500px";
+  document.getElementById("main").style.marginLeft = "500px";
+  document.body.style.backgroundColor = "rgb(255,255,255)";
+}
+function openNav2() {
+  document.getElementById("Order").style.width = "500px";
+  document.getElementById("main").style.marginLeft = "500px";
+  document.body.style.backgroundColor = "rgb(255,255,255)";
+}
+
+/* Set the width of the side navigation to 0 and the left margin of the page content to 0, and the background color of body to white */
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+
+  document.body.style.backgroundColor = "white";
+}
+function closeNav2() {
+    document.getElementById("Order").style.width = "0px";
+
+  document.body.style.backgroundColor = "white";
+}
     </script>
 
 
