@@ -133,11 +133,17 @@ ul {
     overflow: hidden;
     background-color: #333;
   }
-  
+  .ul_menu{
+      margin-bottom:20px ;
+  }
+
+.li_menu {
+    float: left;
+}
   li {
     float: left;
   }
-  li:nth-child(2) {
+  .li_order {
     float: right;
   }
 
@@ -236,4 +242,29 @@ ul {
   @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
+  }
+
+  .menu_box{
+      width: 200px;
+      height: 200px;
+      margin: 10px;
+  }
+  .menu_box > h1 {
+      color: white;
+      font-size: 20px;
+  }
+  #categories_name {
+      color: gold;
+      font-size: 30px;
+  }
+.menu_img {
+    width: 200px;
+    height: 150px;
+}
+
+#mySearch {
+    width: 100%;
+    font-size: 18px;
+    padding: 11px;
+    border: 1px solid #ddd;
   }
