@@ -191,15 +191,21 @@ app.get("/SelectTable", function (req, res) {
 })
 
 app.get("/index", function (req, res) {
+   
         res.render('index', {
             mainListItems: menu.mainD,
             bevListItems: menu.bev,
             desListItems: menu.des,
             appListItems: menu.appit,
         });
-  
+   
 }); 
- 
+app.post("/index", function(req,res){
+    const search = (req.body.searchtext);
+    console.log(search); 
+    res.send('text : ' + search);
+});
+   
 app.listen("3000", () => {
     console.log("Server is running on Port 3000.");
 }); 
