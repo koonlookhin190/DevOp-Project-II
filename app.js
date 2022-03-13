@@ -33,12 +33,19 @@ const tableSchema = {
     order: Object,
 }
 
+const userSchema = {
+    username: String,
+    password: String,
+}
+
 const Main = mongoose.model("Main", menuSchema);
 const Appitizer = mongoose.model("Appitizer", menuSchema);
 const Bever = mongoose.model("Bever", menuSchema);
 const Dess = mongoose.model("Dess", menuSchema);
 
 const Table = mongoose.model("Table", tableSchema);
+
+const User = mongoose.model("User", userSchema);
 
 mongoose.connect(`mongodb://localhost:27017/${databaseName}`, {
     useNewUrlParser: true,
@@ -47,6 +54,10 @@ mongoose.connect(`mongodb://localhost:27017/${databaseName}`, {
 
 var MongoClient = require('mongodb').MongoClient;
 var url = 'mongodb://localhost:27017/';
+
+var kitchenUser = { username: 'kitchen', password: 'kitchen' }
+
+User.insertMany(kitchenUser);
 
 var table1 = { tableNumber: "1", order: [''] }
 var table2 = { tableNumber: "2", order: [''] }
@@ -290,7 +301,30 @@ app.get("/", function (req, res) {
 app.get("/SelectTable", function (req, res) {
     res.render('SelectTable');
 })
- 
+app.get("/login", function (req, res) {
+    res.render('login',{error : false});
+})
+
+app.post("/login", function (req, res) {
+    var usernameInput = (req.body.username)
+    var passwordInput = (req.body.password)
+    MongoClient.connect(url, function (err, db) {
+        var dataBase = db.db('gindaijaiduayDB');
+        dataBase.collection('users').find().toArray(function (err, eee) {
+            if (eee[0].username === usernameInput && eee[0].password === passwordInput) {
+                res.redirect('/kitchen')
+            } else {
+                
+                res.render('login', { error : true })
+            }
+        })
+    })
+})
+
+app.get("/kitchen", function (req, res) {
+    res.render('kitchen');
+})
+
 app.get("/index", function (req, res) {
     // let query = '-';
     // if (req.query.searchtext) {
@@ -426,7 +460,7 @@ app.post('/appmenu', function (req, res) {
             if (err) {
                 console.log(err)
             } else {
-                dataBase.collection('tables').find({ tableNumber:selectedTable }).toArray(function (err, eee) {
+                dataBase.collection('tables').find({ tableNumber: selectedTable }).toArray(function (err, eee) {
                     result[0].request = result[0].request + requestMes;
                     newOrder = eee[0].order;
                     newOrder.push(result[0]);
@@ -442,11 +476,11 @@ app.post('/appmenu', function (req, res) {
     })
     res.redirect('/index')
 })
-var selectedTable=0;
-app.post('/table',function(req,res){
+var selectedTable = 0;
+app.post('/table', function (req, res) {
     selectedTable = (req.body.tableNB)
     console.log(selectedTable);
-    res.redirect('/index')  
+    res.redirect('/index')
 
 })
 
@@ -459,7 +493,7 @@ app.post('/checkbill', function (req, res) {
         })
     })
     res.redirect('/index')
-}) 
+})
 
 app.listen("3000", () => {
     console.log("Server is running on Port 3000.");
