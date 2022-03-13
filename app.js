@@ -302,7 +302,7 @@ app.get("/SelectTable", function (req, res) {
     res.render('SelectTable');
 })
 app.get("/login", function (req, res) {
-    res.render('login',{error : false});
+    res.render('login', { error: false });
 })
 
 app.post("/login", function (req, res) {
@@ -314,19 +314,57 @@ app.post("/login", function (req, res) {
             if (eee[0].username === usernameInput && eee[0].password === passwordInput) {
                 res.redirect('/kitchen')
             } else {
-                
-                res.render('login', { error : true })
+
+                res.render('login', { error: true })
             }
         })
     })
 })
 
 app.get("/kitchen", function (req, res) {
-    res.render('kitchen');
+    MongoClient.connect(url, function (err, db) {
+        var dataBase = db.db('gindaijaiduayDB');
+        dataBase.collection('tables').find().toArray(function (err, eee) {
+
+            res.render('kitchen', {
+                tableLists: eee,
+            });
+        })
+    })
 })
 
+// app.post('/searchmenu', function (req, res) {
+//     var search = (req.body.searchtext)
+//     console.log(search);
+//     MongoClient.connect(url, function (err, db) {
+//         var dataBase = db.db('gindaijaiduayDB');
+//         dataBase.collection('mains').find({ name: search }).toArray(function (err, eee) {
+//             dataBase.collection('tables').find({ tableNumber: selectedTable }).toArray(function (err, eer) {
+//                 var totalPrice = 0;
+//                 for (i = 1; i < eer[0].order.length; i++) {
+//                     totalPrice += eer[0].order[i].prize;
+//                 }
+//                 console.log(eee)
+//                 res.render('index', {
+//                     mainListItems: main,
+//                     bevListItems: beverege,
+//                     desListItems: dessert,
+//                     appListItems: appi,
+//                     orderLists: eer[0].order,
+//                     totalP: totalPrice,
+//                     found: eee,
+//                 })
+//             })
+
+
+//         })
+//     })
+
+// })
+
+
 app.get("/index", function (req, res) {
-    // let query = '-';
+    // let query = '-'; 
     // if (req.query.searchtext) {
     //     query = (req.query.searchtext)
     // }
@@ -356,6 +394,7 @@ app.get("/index", function (req, res) {
                 appListItems: appi,
                 orderLists: eee[0].order,
                 totalP: totalPrice,
+                found: {},
             })
         })
 
@@ -493,6 +532,93 @@ app.post('/checkbill', function (req, res) {
         })
     })
     res.redirect('/index')
+})
+
+app.post('/cancel', function (req, res) {
+    var cancelMenu = (req.body.cancelOrder)
+    console.log(cancelMenu)
+    MongoClient.connect(url, function (err, db) {
+        var dataBase = db.db('gindaijaiduayDB');
+        dataBase.collection('tables').find({ tableNumber: selectedTable }).toArray(function (err, eee) {
+
+            var se = eee[0].order.filter(obj => {
+                return obj.name === cancelMenu
+            })
+            console.log(se)
+
+            for (var i = 0; i < eee[0].order.length; i++) {
+                if (JSON.stringify(eee[0].order[i]) === JSON.stringify(se[0])) {
+                    if (eee[0].order[i].status === '' || eee[0].order[i].status === 'inqueue') {
+                        eee[0].order.splice(i, 1);
+                    } else {
+
+                    } 
+                }
+            }
+            var newOrderAfterDelete = eee[0].order
+            dataBase.collection('tables').findOneAndReplace({ tableNumber: selectedTable }, { tableNumber: selectedTable, order: newOrderAfterDelete })
+        })
+    })
+    res.redirect('/index')
+
+}) 
+
+app.post('/changeStatus', function (req, res) {
+    var statusMess = (req.body.statusMessage)
+    var changedOrder = (req.body.changedStatusOrder)
+
+    MongoClient.connect(url, function (err, db) {
+        var dataBase = db.db('gindaijaiduayDB');
+        dataBase.collection('tables').find({ tableNumber: selectedTable }).toArray(function (err, eee) {
+
+            var se = eee[0].order.filter(obj => {
+                return obj.name === changedOrder
+            })
+            //  console.log(se)
+            for (var i = 0; i < eee[0].order.length; i++) {
+                if (JSON.stringify(eee[0].order[i]) === JSON.stringify(se[0])) {
+                    // var newOrdered = eee[0].order[i];
+                    // newOrdered.status = statusMess
+                    eee[0].order[i].status = statusMess;
+                    //  console.log(newOrdered)
+                }
+            }
+            var completeNewOrder = eee[0].order;
+            //  var completeNewOrder = eee[0].order.push(newOrdered)
+            console.log(completeNewOrder)
+            //  eee[0].order.splice(i, 1);
+            dataBase.collection('tables').findOneAndReplace({ tableNumber: selectedTable }, { tableNumber: selectedTable, order: completeNewOrder })
+
+        })
+    })
+    res.redirect('/kitchen')
+})
+
+
+app.post('/confirm', function (req, res) {
+
+    MongoClient.connect(url, function (err, db) {
+        var dataBase = db.db('gindaijaiduayDB');
+        dataBase.collection('tables').find({ tableNumber: selectedTable }).toArray(function (err, eee) {
+
+            for (var i = 0; i < eee[0].order.length; i++) {
+                if (eee[0].order[i].status === '') {
+                    eee[0].order[i].status = 'inqueue';
+                }
+            }
+            var completeNewOrder = eee[0].order;
+            //  var completeNewOrder = eee[0].order.push(newOrdered)
+            console.log(completeNewOrder)
+            //  eee[0].order.splice(i, 1);
+            dataBase.collection('tables').findOneAndReplace({ tableNumber: selectedTable }, { tableNumber: selectedTable, order: completeNewOrder })
+
+        })
+    })
+    res.redirect('/index')
+})
+
+app.post('/refresh', function (req, res) {
+    res.redirect('/kitchen')
 })
 
 app.listen("3000", () => {

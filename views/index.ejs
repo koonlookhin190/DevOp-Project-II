@@ -17,8 +17,12 @@
                                 <div id="mySidenav" class="sidenav">
                                     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                                     <div class="categories">
-                                        <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.."
-                                            name="searchtext" title="Type in a category">
+                                        <!-- <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.."
+                                            name="searchtext" title="Type in a category"> -->
+                                        <form action="/searchmenu" method="post">
+                                            <input type="text" name="searchtext" />
+                                            <button type="submit">search</button>
+                                        </form>
 
                                         <ul class="ul_menu">
                                             <li class="li_menu"><span onclick="openAppetizer()">Appetizer</span></li>
@@ -159,9 +163,18 @@
                                         <p>
                                             <%= orderLists[i].request %>
                                         </p>
+                                        <p> status : <%= orderLists[i].status %> </p>
+                                        <form action="/cancel" method="post">
+                                            <button type="submit" name ='cancelOrder' value="<%= orderLists[i].name %>">cancel</button>
+                                        </form>
+
                                         <% } %>
                                             <h1> Total price : <%= totalP %>
                                             </h1>
+                                            
+                                            <form action="/confirm" method="post">
+                                                <button type="submit" name ='confirmOrder' value="<%= orderLists.name %>">confirm</button>
+                                            </form>
 
                                             <button id="myBtn2">Checkbill</button>
 
@@ -270,35 +283,35 @@
                 document.body.style.backgroundColor = "white";
             }
 
-            function myFunction() {
-                // Declare variables
-                var input, filter, ul, li, divBox, i, txt;
-                input = document.getElementById("mySearch");
-                filter = input.value.toUpperCase();
-                ul = document.getElementById("myMenu");
-                li = ul.getElementsByTagName("li");
-                var list = [];
-                document.querySelector(".listFromSearchBox").innerHTML = '';
-                // divBox = li[0].getElementsByTagName("div")[0];
-                // console.log(divBox.className);
-                // Loop through all list items, and hide those who don't match the search query
-                for (i = 0; i < li.length; i++) {
-                    divBox = li[i].getElementsByTagName("div")[0];
-                    //console.log('MENU_BOX '+filter)
-                    if (divBox.className.toUpperCase().indexOf('MENU_BOX ' + filter) > -1) {
-                        console.log(true)
-                        list.push(divBox = li[i].getElementsByTagName("div")[0])
-                        // document.querySelector(".listFromSearchBox").appendChild(divBox)
-                    }
-                    else {
+            // function myFunction() {
+            //     // Declare variables
+            //     var input, filter, ul, li, divBox, i, txt;
+            //     input = document.getElementById("mySearch");
+            //     filter = input.value.toUpperCase();
+            //     ul = document.getElementById("myMenu");
+            //     li = ul.getElementsByTagName("li");
+            //     var list = [];
+            //     document.querySelector(".listFromSearchBox").innerHTML = '';
+            //     // divBox = li[0].getElementsByTagName("div")[0];
+            //     // console.log(divBox.className);
+            //     // Loop through all list items, and hide those who don't match the search query
+            //     for (i = 0; i < li.length; i++) {
+            //         divBox = li[i].getElementsByTagName("div")[0];
+            //         //console.log('MENU_BOX '+filter)
+            //         if (divBox.className.toUpperCase().indexOf('MENU_BOX ' + filter) > -1) {
+            //             console.log(true)
+            //             list.push(divBox = li[i].getElementsByTagName("div")[0])
+            //             // document.querySelector(".listFromSearchBox").appendChild(divBox)
+            //         }
+            //         else {
 
-                    }
-                }
-                for (i = 0; i < list.length; i++) {
-                    document.querySelector(".listFromSearchBox").appendChild(list[i])
-                }
-                //document.querySelector(".listFromSearchBox").innerHTML = ''
-            }
+            //         }
+            //     }
+            //     for (i = 0; i < list.length; i++) {
+            //         document.querySelector(".listFromSearchBox").appendChild(list[i])
+            //     }
+            //     //document.querySelector(".listFromSearchBox").innerHTML = ''
+            // }
 
             var modal = document.getElementById("myModal2");
 
