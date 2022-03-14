@@ -32,7 +32,7 @@ const tableSchema = {
     tableNumber: String,
     order: Object,
 }
-
+ 
 const userSchema = {
     username: String,
     password: String,
@@ -50,7 +50,7 @@ const User = mongoose.model("User", userSchema);
 mongoose.connect(`mongodb://localhost:27017/${databaseName}`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-});
+}); 
 
 var MongoClient = require('mongodb').MongoClient;
 var url = 'mongodb://localhost:27017/';
@@ -64,12 +64,14 @@ var table2 = { tableNumber: "2", order: [''] }
 var table3 = { tableNumber: "3", order: [''] }
 var table4 = { tableNumber: "4", order: [''] }
 var table5 = { tableNumber: "5", order: [''] }
-
+var table6 = { tableNumber: "6", order: [''] }
+ 
 Table.insertMany(table1)
 Table.insertMany(table2)
 Table.insertMany(table3)
 Table.insertMany(table4)
 Table.insertMany(table5)
+Table.insertMany(table6)
 
 const appi = [
     {
@@ -172,11 +174,11 @@ const main = [
         status: '',
     }
 ];
-
+ 
 const dessert = [
     {
         id: 0,
-        name: "Chocolate Cake with Ganache",
+        name: "Chocolate Cake",
         prize: "100",
         image: "/image/frontend-Pic/dessert/Chocolate Cake with Ganache.jpeg",
         request: '',
@@ -193,7 +195,7 @@ const dessert = [
     },
     {
         id: 2,
-        name: "Chocolate strawwberry crumble ball",
+        name: "crumble ball",
         prize: "100",
         image: "/image/frontend-Pic/dessert/Chocolate strawwberry crumble ball.jpg",
         request: '',
@@ -202,13 +204,13 @@ const dessert = [
     },
     {
         id: 3,
-        name: "Coconut _ Mango Panna Cotta",
+        name: "Panna Cotta",
         prize: "100",
         image: "/image/frontend-Pic/dessert/Coconut _ Mango Panna Cotta.jpg",
         request: '',
         status: '',
     },
-    {
+    { 
         id: 4,
         name: "Red Velvet and Vanilla Cream Pudding",
         prize: "100",
