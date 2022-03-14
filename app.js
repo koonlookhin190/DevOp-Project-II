@@ -47,31 +47,13 @@ const Table = mongoose.model("Table", tableSchema);
 
 const User = mongoose.model("User", userSchema);
 
-mongoose.connect(`mongodb://localhost:27017/${databaseName}`, {
+mongoose.connect(`mongodb+srv://koonlookhin:0896317907ok@cluster0.qhabo.mongodb.net/${databaseName}`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }); 
 
 var MongoClient = require('mongodb').MongoClient;
-var url = 'mongodb://localhost:27017/';
-
-var kitchenUser = { username: 'kitchen', password: 'kitchen' }
-
-User.insertMany(kitchenUser);
-
-var table1 = { tableNumber: "1", order: [''] }
-var table2 = { tableNumber: "2", order: [''] }
-var table3 = { tableNumber: "3", order: [''] }
-var table4 = { tableNumber: "4", order: [''] }
-var table5 = { tableNumber: "5", order: [''] }
-var table6 = { tableNumber: "6", order: [''] }
- 
-Table.insertMany(table1)
-Table.insertMany(table2)
-Table.insertMany(table3)
-Table.insertMany(table4)
-Table.insertMany(table5)
-Table.insertMany(table6)
+var url = 'mongodb+srv://koonlookhin:0896317907ok@cluster0.qhabo.mongodb.net/test';
 
 const appi = [
     {
@@ -280,21 +262,6 @@ const beverege = [
         status: '',
     }
 ]
-
-// const menu = new Menu({
-//     appit: appi,
-//     mainD: main,
-//     bev: beverege,
-//     des: dessert,
-// })
-
-//Menu.insertMany(menu);
-for (i = 0; i < main.length; i++) {
-    Main.insertMany(main[i]);
-    Appitizer.insertMany(appi[i]);
-    Bever.insertMany(beverege[i]);
-    Dess.insertMany(dessert[i]);
-}
 
 app.get("/", function (req, res) {
     res.render('welcome');
